@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="surround-view-monitor"
+run/main_scene="res://CarSurroundView.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="surround-view-monitor"
 
 [rendering]
 

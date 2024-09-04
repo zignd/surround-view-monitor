@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bisux31xy03c"]
+
+[ext_resource type="Script" path="res://CameraRotation.gd" id="1_c1j2p"]
+[ext_resource type="Shader" path="res://CarSurroundView.gdshader" id="2_3giqf"]
+[ext_resource type="Texture2D" uid="uid://bpvidpkx7h2t" path="res://full-seamless-spherical-panorama-360-by-180-angle-view-near-railroad-crossing-in-equirectangular-projection-ready-vr-virtual-reality-content-RXCKHR.jpg" id="3_3p2ij"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ay2fl"]
+size = Vector3(2.4, 1.6, 4.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_43o8p"]
+render_priority = 0
+shader = ExtResource("2_3giqf")
+shader_parameter/panorama = ExtResource("3_3p2ij")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cd3hk"]
+material = SubResource("ShaderMaterial_43o8p")
+radius = 5.0
+height = 10.0
+
+[node name="World" type="Node3D"]
+
+[node name="MainCar" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ay2fl")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+visible = false
+script = ExtResource("1_c1j2p")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.882948, 0.469472, 0, -0.469472, 0.882948, 0, 3.77568, 8.40405)
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.578299, 0.815825, 0, -0.815825, 0.578299, 0, 2.18864, 0)
+
+[node name="Car2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08181, 0, -3.28258)
+visible = false
+mesh = SubResource("BoxMesh_ay2fl")
+
+[node name="Car3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44668, 0, -7.29671)
+visible = false
+mesh = SubResource("BoxMesh_ay2fl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("SphereMesh_cd3hk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+script = ExtResource("1_c1j2p")
